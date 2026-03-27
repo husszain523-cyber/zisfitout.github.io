@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZIS Fitouts – Crafting Spaces Since 2005</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rg1: #c9a0a0;
+  --rg2: #d4a8b0;
+  --rg3: #e8c4c4;
+  --silver: #b8bcc8;
+  --cream: #faf8f6;
+  --cream2: #f4f1ee;
+  --cream3: #ede9e5;
+  --white: #ffffff;
+  --charcoal: #2a2a2a;
+  --dark-mid: #4a4a4a;
+  --muted: #8a8a8a;
+  --muted-light: #b0b0b0;
+  --grad: linear-gradient(135deg, #b8bcc8 0%, #c9a0a0 40%, #d4a8b0 60%, #e0b8b8 80%, #c8b8c8 100%);
+  --grad-soft: linear-gradient(135deg, rgba(184,188,200,0.12) 0%, rgba(201,160,160,0.12) 50%, rgba(212,168,176,0.12) 100%);
+  --grad-text: linear-gradient(135deg, #b8bcc8 0%, #c9a0a0 45%, #d4a8b0 70%, #c8b8c8 100%);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--charcoal);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* ── CURSOR ── */
+.cursor{position:fixed;width:6px;height:6px;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);background:var(--rg1);transition:transform 0.1s;}
+.cursor-ring{position:fixed;width:30px;height:30px;border:1.5px solid rgba(201,160,160,0.6);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s;}
+.cursor-ring.hovered{width:48px;height:48px;border-color:var(--rg1);}
+
+/* ── NOISE OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:0.025;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:22px 60px;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);}
+nav.scrolled{background:rgba(250,248,246,0.94);backdrop-filter:blur(20px);padding:14px 60px;border-bottom:1px solid rgba(201,160,160,0.18);box-shadow:0 4px 48px rgba(201,160,160,0.1);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-logo img{height:50px;width:50px;object-fit:contain;border-radius:4px;}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1;}
+.nav-logo-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;letter-spacing:0.12em;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-logo-sub{font-size:0.58rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);}
+.nav-links{display:flex;gap:34px;list-style:none;}
+.nav-links a{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark-mid);text-decoration:none;transition:color 0.3s;font-weight:400;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
+.nav-links a:hover{color:var(--rg1);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-wa{display:flex;align-items:center;gap:8px;font-size:0.7rem;letter-spacing:0.12em;color:var(--charcoal);text-decoration:none;font-weight:400;transition:color 0.3s;}
+.nav-wa:hover{color:#25d366;}
+.nav-wa svg{width:18px;height:18px;fill:#25d366;}
+.nav-cta{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--grad);border:none;padding:12px 28px;text-decoration:none;font-weight:400;transition:opacity 0.3s,transform 0.2s;font-family:'Jost',sans-serif;cursor:pointer;display:inline-block;}
+.nav-cta:hover{opacity:0.85;transform:translateY(-1px);}
+
+/* ── HERO ── */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.08);animation:heroZoom 12s ease-out forwards;}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(250,248,246,0.96) 0%,rgba(250,248,246,0.88) 35%,rgba(250,248,246,0.3) 65%,rgba(250,248,246,0.05) 100%);}
+.hero-content{position:relative;z-index:2;padding:0 60px;max-width:700px;padding-top:80px;}
+.hero-eyebrow{display:flex;align-items:center;gap:14px;font-size:0.63rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--rg1);margin-bottom:26px;opacity:0;animation:fadeUp 0.8s 0.3s ease forwards;}
+.hero-eyebrow-line{width:40px;height:1px;background:var(--grad);}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,6vw,7.2rem);font-weight:300;line-height:0.93;color:var(--charcoal);margin-bottom:10px;opacity:0;animation:fadeUp 0.9s 0.5s ease forwards;}
+.hero-title em{font-style:italic;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-title-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,2.4vw,2rem);font-weight:300;font-style:italic;color:var(--muted);margin-bottom:32px;opacity:0;animation:fadeUp 0.8s 0.65s ease forwards;}
+.hero-desc{font-size:0.92rem;line-height:1.95;color:var(--muted);max-width:420px;margin-bottom:48px;opacity:0;animation:fadeUp 0.8s 0.8s ease forwards;}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.95s ease forwards;}
+.btn-primary{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white);background:var(--grad);padding:16px 44px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;transition:opacity 0.3s,transform 0.25s,box-shadow 0.3s;display:inline-block;box-shadow:0 8px 32px rgba(201,160,160,0.35);}
+.btn-primary:hover{opacity:0.88;transform:translateY(-3px);box-shadow:0 14px 40px rgba(201,160,160,0.45);}
+.btn-ghost{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--charcoal);border:1px solid rgba(201,160,160,0.4);padding:16px 44px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;transition:all 0.3s;display:inline-block;}
+.btn-ghost:hover{border-color:var(--rg1);color:var(--rg1);background:rgba(201,160,160,0.06);}
+.hero-scroll{position:absolute;bottom:40px;left:60px;display:flex;align-items:center;gap:14px;font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted-light);z-index:2;opacity:0;animation:fadeIn 1s 1.6s forwards;}
+.hero-scroll-line{width:50px;height:1px;background:linear-gradient(90deg,var(--rg1),transparent);animation:pulseWidth 2.5s ease-in-out infinite;}
+.hero-badges{position:absolute;right:60px;bottom:60px;z-index:2;display:flex;flex-direction:column;gap:12px;opacity:0;animation:slideLeft 0.8s 1.2s ease forwards;}
+.hero-badge{background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);border:1px solid rgba(201,160,160,0.2);padding:18px 26px;box-shadow:0 8px 32px rgba(201,160,160,0.15);display:flex;align-items:center;gap:16px;}
+.badge-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;line-height:1;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.badge-lbl{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);line-height:1.4;}
+
+/* ── TICKER ── */
+.ticker{background:var(--cream2);border-top:1px solid rgba(201,160,160,0.2);border-bottom:1px solid rgba(201,160,160,0.2);padding:13px 0;overflow:hidden;position:relative;z-index:2;}
+.ticker-track{display:flex;animation:ticker 35s linear infinite;white-space:nowrap;}
+.ticker-track:hover{animation-play-state:paused;}
+.ticker-item{font-size:0.66rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);padding:0 32px;display:inline-flex;align-items:center;gap:32px;flex-shrink:0;}
+.ticker-dot{width:5px;height:5px;border-radius:50%;background:var(--grad);display:inline-block;flex-shrink:0;}
+
+/* ── SHARED ── */
+.section-label{display:flex;align-items:center;gap:14px;font-size:0.63rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--rg1);margin-bottom:16px;}
+.section-label-line{width:36px;height:1px;background:var(--grad);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.8rem);font-weight:300;line-height:1.06;color:var(--charcoal);}
+.section-title em{font-style:italic;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* ── SERVICES ── */
+.services-section{padding:128px 60px;background:var(--white);}
+.services-header{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:72px;}
+.services-header p{font-size:0.9rem;line-height:1.95;color:var(--muted);}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+
+.svc-card{background:var(--cream);padding:0;position:relative;overflow:hidden;transition:all 0.45s cubic-bezier(0.4,0,0.2,1);border-bottom:3px solid transparent;cursor:default;display:flex;flex-direction:column;}
+.svc-img{width:100%;height:220px;overflow:hidden;position:relative;}
+.svc-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s cubic-bezier(0.4,0,0.2,1);}
+.svc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(250,248,246,0.4) 100%);}
+.svc-card:hover .svc-img img{transform:scale(1.08);}
+.svc-body{padding:36px 36px 40px;flex:1;position:relative;}
+.svc-body::before{content:'';position:absolute;inset:0;background:var(--grad-soft);opacity:0;transition:opacity 0.4s;}
+.svc-card:hover{background:var(--white);border-bottom-color:var(--rg1);box-shadow:0 12px 48px rgba(201,160,160,0.14);transform:translateY(-4px);}
+.svc-card:hover .svc-body::before{opacity:1;}
+.svc-num{font-family:'Cormorant Garamond',serif;font-size:3.8rem;font-weight:600;position:absolute;top:16px;right:22px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0.14;line-height:1;}
+.svc-icon{margin-bottom:20px;position:relative;z-index:1;}
+.svc-icon svg{width:36px;height:36px;stroke:var(--rg1);fill:none;stroke-width:1.3;}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;color:var(--charcoal);margin-bottom:12px;position:relative;z-index:1;}
+.svc-desc{font-size:0.83rem;line-height:1.85;color:var(--muted);position:relative;z-index:1;}
+.svc-more{display:inline-flex;align-items:center;gap:8px;font-size:0.63rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--rg1);margin-top:24px;opacity:0;transform:translateX(-8px);transition:all 0.35s;position:relative;z-index:1;text-decoration:none;}
+.svc-more svg{width:13px;height:13px;stroke:var(--rg1);stroke-width:1.8;fill:none;transition:transform 0.3s;}
+.svc-card:hover .svc-more{opacity:1;transform:translateX(0);}
+.svc-card:hover .svc-more svg{transform:translateX(5px);}
+.svc-wide{grid-column:span 2;}
+
+/* ── ABOUT STRIP ── */
+.about-strip{display:grid;grid-template-columns:1fr 1fr;min-height:560px;}
+.about-img{position:relative;overflow:hidden;}
+.about-img img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease;}
+.about-img:hover img{transform:scale(1.04);}
+.about-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,rgba(244,241,238,0.95) 100%);}
+.about-content{background:var(--cream2);padding:90px 72px;display:flex;flex-direction:column;justify-content:center;}
+.about-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,2.2vw,2rem);font-style:italic;font-weight:300;line-height:1.55;color:var(--charcoal);margin:28px 0 36px;position:relative;padding-left:28px;}
+.about-quote::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--grad);}
+.about-text{font-size:0.88rem;line-height:1.95;color:var(--muted);margin-bottom:40px;}
+
+/* ── WHY ── */
+.why-section{background:var(--white);padding:128px 60px;display:grid;grid-template-columns:5fr 4fr;gap:80px;align-items:start;}
+.why-intro{font-size:0.9rem;line-height:1.95;color:var(--muted);max-width:460px;margin-top:26px;margin-bottom:52px;}
+.why-features{display:flex;flex-direction:column;gap:3px;}
+.why-feature{display:flex;gap:26px;align-items:flex-start;background:var(--cream);padding:26px 30px;border-left:3px solid transparent;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);}
+.why-feature:hover{border-left-color:var(--rg1);background:var(--white);box-shadow:4px 0 24px rgba(201,160,160,0.1);}
+.why-feature-icon{width:42px;height:42px;flex-shrink:0;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;border-radius:50%;transition:transform 0.3s;}
+.why-feature:hover .why-feature-icon{transform:scale(1.1);}
+.why-feature-icon svg{width:18px;height:18px;stroke:var(--rg1);fill:none;stroke-width:1.5;}
+.why-feature-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:var(--charcoal);margin-bottom:5px;}
+.why-feature-desc{font-size:0.81rem;line-height:1.75;color:var(--muted);}
+.why-right{}
+.why-big-num{font-family:'Cormorant Garamond',serif;font-size:13rem;font-weight:600;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:0.8;position:absolute;top:-30px;left:-10px;pointer-events:none;opacity:0.06;}
+.stats-visual{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:3px;padding-top:48px;}
+.stat-box{background:var(--cream);padding:40px 28px;text-align:center;position:relative;overflow:hidden;transition:all 0.35s;cursor:default;}
+.stat-box:first-child{grid-column:span 2;}
+.stat-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);}
+.stat-box:hover{background:var(--white);box-shadow:0 4px 28px rgba(201,160,160,0.12);}
+.stat-box:hover::after{transform:scaleX(1);}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:3.6rem;font-weight:300;line-height:1;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-label{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-top:8px;line-height:1.5;}
+
+/* ── PORTFOLIO ── */
+.portfolio-section{padding:128px 60px;background:var(--cream2);}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:300px 300px;gap:4px;margin-top:64px;}
+.port-item{position:relative;overflow:hidden;cursor:default;}
+.port-item:nth-child(1){grid-column:span 2;}
+.port-item:nth-child(5){grid-column:span 2;}
+.port-img{position:absolute;inset:0;}
+.port-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s cubic-bezier(0.4,0,0.2,1);}
+.port-item:hover .port-img img{transform:scale(1.07);}
+.port-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,18,16,0.78) 0%,rgba(20,18,16,0.1) 50%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:32px 36px;transition:background 0.4s;}
+.port-item:hover .port-overlay{background:linear-gradient(to top,rgba(20,18,16,0.85) 0%,rgba(20,18,16,0.2) 60%,transparent 100%);}
+.port-tag{position:absolute;top:22px;left:22px;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--charcoal);background:rgba(255,255,255,0.88);padding:6px 14px;backdrop-filter:blur(6px);transition:background 0.3s;}
+.port-cat{font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:5px;transform:translateY(8px);opacity:0;transition:all 0.4s 0.05s;}
+.port-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:300;color:var(--white);transform:translateY(10px);opacity:0;transition:all 0.4s;}
+.port-item:hover .port-cat,.port-item:hover .port-name{opacity:1;transform:translateY(0);}
+.port-arrow{position:absolute;bottom:32px;right:32px;width:40px;height:40px;border:1px solid rgba(255,255,255,0.35);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(8px);transition:all 0.35s 0.1s;}
+.port-arrow svg{width:16px;height:16px;stroke:var(--white);fill:none;stroke-width:1.5;}
+.port-item:hover .port-arrow{opacity:1;transform:translateX(0);}
+
+/* ── PROCESS ── */
+.process-section{padding:128px 60px;background:var(--white);}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:72px;}
+.step{background:var(--cream);padding:52px 34px;position:relative;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);border-top:3px solid transparent;overflow:hidden;}
+.step::before{content:'';position:absolute;inset:0;background:var(--grad-soft);opacity:0;transition:opacity 0.4s;}
+.step:hover{background:var(--white);border-top-color:var(--rg1);box-shadow:0 -4px 36px rgba(201,160,160,0.1);transform:translateY(-4px);}
+.step:hover::before{opacity:1;}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;line-height:1;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:26px;opacity:0.55;position:relative;z-index:1;}
+.step-icon{margin-bottom:16px;position:relative;z-index:1;}
+.step-icon svg{width:32px;height:32px;stroke:var(--rg1);fill:none;stroke-width:1.3;transition:transform 0.3s;}
+.step:hover .step-icon svg{transform:scale(1.15);}
+.step-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--charcoal);margin-bottom:12px;position:relative;z-index:1;}
+.step-desc{font-size:0.82rem;line-height:1.82;color:var(--muted);position:relative;z-index:1;}
+
+/* ── TESTIMONIALS ── */
+.testi-section{padding:128px 60px;background:var(--cream2);position:relative;overflow:hidden;}
+.testi-bg-quote{position:absolute;top:-10px;left:-20px;font-family:'Cormorant Garamond',serif;font-size:28rem;font-weight:600;line-height:0.8;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0.04;pointer-events:none;user-select:none;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:64px;}
+.testi-card{background:var(--white);padding:44px 36px;position:relative;transition:all 0.4s;border-top:3px solid transparent;overflow:hidden;}
+.testi-card::before{content:'';position:absolute;inset:0;background:var(--grad-soft);opacity:0;transition:opacity 0.4s;}
+.testi-card:hover{border-top-color:var(--rg1);box-shadow:0 -4px 36px rgba(201,160,160,0.12);}
+.testi-card:hover::before{opacity:1;}
+.testi-stars{display:flex;gap:3px;margin-bottom:18px;position:relative;z-index:1;}
+.testi-stars span{font-size:0.72rem;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.testi-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;font-weight:300;line-height:1.72;color:var(--dark-mid);margin-bottom:28px;position:relative;z-index:1;}
+.testi-author{display:flex;align-items:center;gap:14px;position:relative;z-index:1;}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:white;flex-shrink:0;}
+.testi-name{font-size:0.82rem;font-weight:400;color:var(--charcoal);}
+.testi-role{font-size:0.7rem;color:var(--muted);margin-top:2px;}
+
+/* ── CONTACT ── */
+.contact-section{padding:128px 60px;background:var(--charcoal);display:grid;grid-template-columns:1fr 1fr;gap:80px;position:relative;overflow:hidden;}
+.contact-section::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,160,160,0.08) 0%,transparent 70%);}
+.contact-left .section-label{color:var(--rg3);}
+.contact-left .section-title{color:var(--white);}
+.contact-left .section-title em{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.contact-desc{font-size:0.88rem;line-height:1.95;color:rgba(255,255,255,0.42);margin-top:22px;max-width:360px;}
+.contact-info{margin-top:48px;display:flex;flex-direction:column;gap:20px;}
+.contact-info-item{display:flex;align-items:flex-start;gap:18px;transition:transform 0.3s;}
+.contact-info-item:hover{transform:translateX(4px);}
+.contact-info-icon{width:42px;height:42px;flex-shrink:0;border:1px solid rgba(201,160,160,0.25);display:flex;align-items:center;justify-content:center;transition:border-color 0.3s,background 0.3s;}
+.contact-info-item:hover .contact-info-icon{border-color:var(--rg1);background:rgba(201,160,160,0.08);}
+.contact-info-icon svg{width:16px;height:16px;stroke:var(--rg3);fill:none;stroke-width:1.5;}
+.contact-info-icon.wa-icon svg{fill:#25d366;stroke:none;}
+.contact-info-label{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:3px;}
+.contact-info-val{font-size:0.88rem;color:rgba(255,255,255,0.78);line-height:1.5;text-decoration:none;}
+.contact-info-val:hover{color:var(--rg3);}
+.social-row{display:flex;gap:12px;margin-top:32px;}
+.social-btn{display:flex;align-items:center;gap:9px;padding:10px 20px;border:1px solid rgba(255,255,255,0.1);font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-decoration:none;transition:all 0.3s;}
+.social-btn:hover{border-color:var(--rg1);color:var(--rg3);}
+.social-btn svg{width:15px;height:15px;}
+
+.contact-form{display:flex;flex-direction:column;gap:14px;position:relative;z-index:1;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:7px;}
+.form-group label{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.38);}
+.form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:14px 16px;color:var(--white);font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;transition:border-color 0.3s,background 0.3s;appearance:none;border-radius:0;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(201,160,160,0.45);background:rgba(255,255,255,0.06);}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.18);}
+.form-group select option{background:#2a2a2a;}
+.form-group textarea{resize:vertical;min-height:110px;}
+.form-submit{background:var(--grad);border:none;padding:16px 44px;cursor:pointer;font-family:'Jost',sans-serif;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--white);font-weight:400;transition:opacity 0.3s,transform 0.25s,box-shadow 0.3s;align-self:flex-start;margin-top:4px;box-shadow:0 8px 32px rgba(201,160,160,0.25);}
+.form-submit:hover{opacity:0.88;transform:translateY(-2px);box-shadow:0 14px 40px rgba(201,160,160,0.38);}
+
+/* ── FOOTER ── */
+footer{background:#191919;padding:72px 60px 32px;}
+.footer-top{display:grid;grid-template-columns:2.2fr 1fr 1fr 1.2fr;gap:56px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.footer-brand img{height:64px;object-fit:contain;margin-bottom:14px;border-radius:4px;}
+.footer-brand p{font-size:0.82rem;line-height:1.85;color:rgba(255,255,255,0.3);max-width:250px;margin-top:14px;}
+.footer-col-title{font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-links a{font-size:0.84rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.3s,transform 0.3s;display:inline-block;}
+.footer-links a:hover{color:var(--rg3);transform:translateX(4px);}
+.footer-contact-item{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.footer-contact-item svg{width:14px;height:14px;stroke:var(--rg1);fill:none;stroke-width:1.5;flex-shrink:0;}
+.footer-contact-item a{font-size:0.82rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.3s;}
+.footer-contact-item a:hover{color:var(--rg3);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:26px;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:0.72rem;color:rgba(255,255,255,0.2);}
+.footer-grad-text{font-size:0.7rem;letter-spacing:0.18em;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float{position:fixed;bottom:32px;right:32px;z-index:400;width:58px;height:58px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(37,211,102,0.45);text-decoration:none;transition:transform 0.3s,box-shadow 0.3s;animation:waBounce 2.5s ease-in-out infinite 3s;}
+.wa-float:hover{transform:scale(1.12);box-shadow:0 10px 36px rgba(37,211,102,0.55);animation:none;}
+.wa-float svg{width:30px;height:30px;fill:white;}
+.wa-tooltip{position:absolute;right:68px;background:var(--charcoal);color:white;font-size:0.72rem;letter-spacing:0.1em;padding:8px 14px;white-space:nowrap;opacity:0;transform:translateX(6px);transition:all 0.3s;pointer-events:none;}
+.wa-float:hover .wa-tooltip{opacity:1;transform:translateX(0);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(32px);}to{opacity:1;transform:translateX(0);}}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes heroZoom{from{transform:scale(1.08);}to{transform:scale(1);}}
+@keyframes pulseWidth{0%,100%{opacity:0.35;width:50px;}50%{opacity:1;width:70px;}}
+@keyframes waBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1),transform 0.8s cubic-bezier(0.4,0,0.2,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1),transform 0.8s cubic-bezier(0.4,0,0.2,1);}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1),transform 0.8s cubic-bezier(0.4,0,0.2,1);}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+.d1{transition-delay:0.1s;}.d2{transition-delay:0.18s;}.d3{transition-delay:0.26s;}.d4{transition-delay:0.34s;}.d5{transition-delay:0.42s;}
+
+/* ── COUNTER ── */
+.count-num{display:inline-block;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  nav{padding:18px 32px;}
+  nav.scrolled{padding:13px 32px;}
+  .nav-links{display:none;}
+  .hero-content{padding:0 32px;padding-top:80px;}
+  .hero-badges{right:32px;bottom:40px;}
+  .services-section,.why-section,.process-section,.portfolio-section,.testi-section,.contact-section{padding:80px 32px;}
+  .services-header{grid-template-columns:1fr;}
+  .services-grid{grid-template-columns:1fr 1fr;}
+  .svc-wide{grid-column:span 2;}
+  .about-strip{grid-template-columns:1fr;}
+  .about-img{height:360px;}
+  .about-img::after{display:none;}
+  .why-section{grid-template-columns:1fr;gap:48px;}
+  .process-steps{grid-template-columns:1fr 1fr;}
+  .portfolio-grid{grid-template-rows:240px 240px 240px;}
+  .portfolio-grid .port-item:nth-child(1),.portfolio-grid .port-item:nth-child(5){grid-column:span 1;}
+  .testi-grid{grid-template-columns:1fr;}
+  .contact-section{grid-template-columns:1fr;gap:52px;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  footer{padding:48px 32px 28px;}
+}
+@media(max-width:640px){
+  .hero-badges{display:none;}
+  .services-grid{grid-template-columns:1fr;}
+  .svc-wide{grid-column:span 1;}
+  .process-steps{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .portfolio-grid{grid-template-columns:1fr;grid-template-rows:repeat(6,220px);}
+  .portfolio-grid .port-item:nth-child(1),.portfolio-grid .port-item:nth-child(5){grid-column:span 1;}
+  .testi-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/971565336465" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="wa-tooltip">Chat on WhatsApp</div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.526 5.845L0 24l6.345-1.487A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.373l-.36-.214-3.724.873.946-3.618-.235-.372A9.792 9.792 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="WhatsApp_Image_2026-01-20_at_12_12_53.jpeg" alt="ZIS Fitouts Logo">
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">ZIS Fitouts</span>
+      <span class="nav-logo-sub">Since 2005</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://wa.me/971565336465" class="nav-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.526 5.845L0 24l6.345-1.487A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.373l-.36-.214-3.724.873.946-3.618-.235-.372A9.792 9.792 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      WhatsApp
+    </a>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1800&q=90&auto=format&fit=crop" alt="Luxury Interior">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div>Premium Interior &amp; Construction · UAE</div>
+    <h1 class="hero-title">Crafting<br><em>Spaces</em><br>That Inspire</h1>
+    <p class="hero-title-sub">Since 2005, Across the Emirates</p>
+    <p class="hero-desc">From concept to completion, ZIS Fitouts delivers exceptional interior fitouts, metal fabrication, landscaping, renovations, and carpentry — transforming every space into a masterpiece.</p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">Explore Our Work</a>
+      <a href="#contact" class="btn-ghost">Free Consultation</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div>Scroll to explore</div>
+  <div class="hero-badges">
+    <div class="hero-badge">
+      <div class="badge-num"><span class="count-num" data-target="500">0</span>+</div>
+      <div class="badge-lbl">Projects<br>Completed</div>
+    </div>
+    <div class="hero-badge">
+      <div class="badge-num"><span class="count-num" data-target="20">0</span>+</div>
+      <div class="badge-lbl">Years of<br>Excellence</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Interior Fitouts<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Metal Fabrication<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Renovations<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Landscaping<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Carpentry &amp; Joinery<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Bespoke Design<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Since 2005<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Dubai · UAE<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Interior Fitouts<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Metal Fabrication<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Renovations<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Landscaping<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Carpentry &amp; Joinery<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Bespoke Design<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Since 2005<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Dubai · UAE<span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-label"><div class="section-label-line"></div>What We Do</div>
+      <h2 class="section-title">Our <em>Expertise</em><br>&amp; Services</h2>
+    </div>
+    <p>With over two decades of expertise in the UAE, we deliver end-to-end solutions — from raw structure to refined finish — blending master craftsmanship with contemporary design vision.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="svc-card reveal d1">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=85&auto=format&fit=crop" alt="Interior Fitouts">
+      </div>
+      <div class="svc-body">
+        <div class="svc-num">01</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="svc-name">Interior Fitouts</div>
+        <p class="svc-desc">Complete fit-out solutions for residential, commercial, and hospitality spaces. From spatial planning to the final decorative touch — immersive environments crafted to perfection.</p>
+        <a href="#contact" class="svc-more">Get a Quote <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="svc-card reveal d2">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=85&auto=format&fit=crop" alt="Metal Fabrication">
+      </div>
+      <div class="svc-body">
+        <div class="svc-num">02</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="svc-name">Metal Fabrication</div>
+        <p class="svc-desc">Precision-engineered metalwork — structural steel, bespoke furniture, decorative elements, railings, and cladding crafted to your exact specifications with artisan precision.</p>
+        <a href="#contact" class="svc-more">Get a Quote <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="svc-card reveal d3">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=85&auto=format&fit=crop" alt="Renovations">
+      </div>
+      <div class="svc-body">
+        <div class="svc-num">03</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="svc-name">Renovations</div>
+        <p class="svc-desc">Full-scale renovation services that breathe new life into existing spaces. Residential or commercial — we handle everything from demolition to the finishing coat.</p>
+        <a href="#contact" class="svc-more">Get a Quote <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="svc-card reveal d1">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format&fit=crop" alt="Landscaping">
+      </div>
+      <div class="svc-body">
+        <div class="svc-num">04</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C12 7 7 4 7 4s0 4 5 8zm0 0c0-5 5-8 5-8s0 4-5 8z"/><path d="M5 19c0-2.5 3.1-4 7-4s7 1.5 7 4"/></svg></div>
+        <div class="svc-name">Landscaping</div>
+        <p class="svc-desc">Transforming outdoor spaces into lush, functional retreats. We design and install gardens, water features, hardscaping, and sustainable green environments across the UAE.</p>
+        <a href="#contact" class="svc-more">Get a Quote <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="svc-card svc-wide reveal d2">
+      <div class="svc-img" style="height:260px;">
+        <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=1200&q=85&auto=format&fit=crop" alt="Carpentry and Joinery">
+      </div>
+      <div class="svc-body">
+        <div class="svc-num">05</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <div class="svc-name">Carpentry &amp; Joinery Works</div>
+        <p class="svc-desc">Expert woodworking and joinery — bespoke cabinetry, custom furniture, fitted wardrobes, doors, flooring, and intricate millwork. Each piece crafted to perfectly complement your space and reflect your personal style with enduring quality.</p>
+        <a href="#contact" class="svc-more">Get a Quote <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<section class="about-strip" id="about">
+  <div class="about-img reveal-left">
+    <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1000&q=90&auto=format&fit=crop" alt="ZIS Fitouts craftsmanship">
+  </div>
+  <div class="about-content reveal-right">
+    <div class="section-label"><div class="section-label-line"></div>Our Story</div>
+    <h2 class="section-title">Built on Trust,<br><em>Defined</em> by Quality</h2>
+    <blockquote class="about-quote">"Every space tells a story. We make sure yours is extraordinary."</blockquote>
+    <p class="about-text">Since 2005, ZIS Fitouts has been the preferred partner for clients across the UAE who demand excellence. Our team of skilled craftsmen, designers, and project managers work in perfect harmony — delivering projects on time and beyond expectation, every single time.</p>
+    <a href="#contact" class="btn-ghost">Start Your Project</a>
+  </div>
+</section>
+
+<!-- WHY ZIS -->
+<section class="why-section">
+  <div class="why-left reveal">
+    <div class="section-label"><div class="section-label-line"></div>Why Choose ZIS</div>
+    <h2 class="section-title">Your Vision,<br>Our <em>Craft</em></h2>
+    <p class="why-intro">We don't just build spaces — we create experiences. From the first consultation to the final handover, ZIS Fitouts ensures every detail reflects the quality our clients deserve.</p>
+    <div class="why-features">
+      <div class="why-feature reveal d1">
+        <div class="why-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="why-feature-title">20+ Years of Experience</div><div class="why-feature-desc">Two decades of delivering award-worthy spaces across the UAE — residential, commercial, and hospitality.</div></div>
+      </div>
+      <div class="why-feature reveal d2">
+        <div class="why-feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div><div class="why-feature-title">On-Time Delivery, Every Time</div><div class="why-feature-desc">We respect your timeline. Our proven project management ensures every milestone is hit without compromise.</div></div>
+      </div>
+      <div class="why-feature reveal d3">
+        <div class="why-feature-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <div><div class="why-feature-title">Full End-to-End Solutions</div><div class="why-feature-desc">One partner for design, fabrication, construction, and landscaping — seamless execution from vision to reality.</div></div>
+      </div>
+      <div class="why-feature reveal d4">
+        <div class="why-feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="why-feature-title">UAE-Wide Coverage</div><div class="why-feature-desc">Operating across Dubai, Abu Dhabi, Sharjah, and beyond — wherever your project takes us, we're there.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="why-right reveal">
+    <div style="position:relative;">
+      <div class="why-big-num">20</div>
+      <div class="stats-visual">
+        <div class="stat-box"><div class="stat-num"><span class="count-num" data-target="500">0</span>+</div><div class="stat-label">Projects Completed Across the UAE</div></div>
+        <div class="stat-box"><div class="stat-num"><span class="count-num" data-target="20">0</span>+</div><div class="stat-label">Years of Expertise</div></div>
+        <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Core Service Disciplines</div></div>
+        <div class="stat-box"><div class="stat-num"><span class="count-num" data-target="98">0</span>%</div><div class="stat-label">Client Satisfaction Rate</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section" id="portfolio">
+  <div class="reveal">
+    <div class="section-label"><div class="section-label-line"></div>Our Work</div>
+    <h2 class="section-title">Selected <em>Projects</em></h2>
+  </div>
+  <div class="portfolio-grid">
+
+    <div class="port-item reveal d1">
+      <div class="port-img"><img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=900&q=85&auto=format&fit=crop" alt="Luxury Villa Interior Dubai"></div>
+      <div class="port-tag">Interior Fitout</div>
+      <div class="port-overlay">
+        <div class="port-cat">Residential · Dubai Hills</div>
+        <div class="port-name">Luxury Villa Interior</div>
+        <div class="port-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+      </div>
+    </div>
+
+    <div class="port-item reveal d2">
+      <div class="port-img"><img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=700&q=85&auto=format&fit=crop" alt="Metal Fabrication Structure"></div>
+      <div class="port-tag">Metal Fabrication</div>
+      <div class="port-overlay">
+        <div class="port-cat">Commercial · DIFC</div>
+        <div class="port-name">Steel Feature Installation</div>
+        <div class="port-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+      </div>
+    </div>
+
+    <div class="port-item reveal d3">
+      <div class="port-img"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=85&auto=format&fit=crop" alt="Bespoke Carpentry Kitchen"></div>
+      <div class="port-tag">Carpentry &amp; Joinery</div>
+      <div class="port-overlay">
+        <div class="port-cat">Bespoke · Palm Jumeirah</div>
+        <div class="port-name">Custom Kitchen Joinery</div>
+        <div class="port-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+      </div>
+    </div>
+
+    <div class="port-item reveal d1">
+      <div class="port-img"><img src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=700&q=85&auto=format&fit=crop" alt="Luxury Garden Landscaping"></div>
+      <div class="port-tag">Landscaping</div>
+      <div class="port-overlay">
+        <div class="port-cat">Villa Garden · Arabian Ranches</div>
+        <div class="port-name">Luxury Garden &amp; Pool</div>
+        <div class="port-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+      </div>
+    </div>
+
+    <div class="port-item reveal d2">
+      <div class="port-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=85&auto=format&fit=crop" alt="Modern Corporate Office"></div>
+      <div class="port-tag">Office Fitout</div>
+      <div class="port-overlay">
+        <div class="port-cat">Commercial · Business Bay</div>
+        <div class="port-name">Corporate Office Suite</div>
+        <div class="port-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+      </div>
+    </div>
+
+    <div class="port-item reveal d3">
+      <div class="port-img"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=85&auto=format&fit=crop" alt="Bedroom Interior Dubai"></div>
+      <div class="port-tag">Renovation</div>
+      <div class="port-overlay">
+        <div class="port-cat">Residential · Jumeirah</div>
+        <div class="port-name">Master Suite Renovation</div>
+        <div class="port-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="reveal">
+    <div class="section-label"><div class="section-label-line"></div>How We Work</div>
+    <h2 class="section-title">Our <em>Process</em></h2>
+  </div>
+  <div class="process-steps">
+    <div class="step reveal d1">
+      <div class="step-num">01</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="step-title">Consultation &amp; Vision</div>
+      <p class="step-desc">We begin with a deep dive into your goals, lifestyle, and preferences — understanding every detail before drawing a single line.</p>
+    </div>
+    <div class="step reveal d2">
+      <div class="step-num">02</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+      <div class="step-title">Design &amp; Planning</div>
+      <p class="step-desc">Our designers craft detailed concepts, 3D visualizations, and material boards — giving you a crystal-clear picture before work begins.</p>
+    </div>
+    <div class="step reveal d3">
+      <div class="step-num">03</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M21 12h-2M5 12H3M12 21v-2M12 5V3"/></svg></div>
+      <div class="step-title">Fabrication &amp; Build</div>
+      <p class="step-desc">Skilled craftsmen bring the design to life with precision. From metalwork to millwork, every element is built to the highest standard.</p>
+    </div>
+    <div class="step reveal d4">
+      <div class="step-num">04</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="step-title">Handover &amp; Support</div>
+      <p class="step-desc">A thorough quality walkthrough ensures everything is perfect — then we remain available for ongoing aftercare and support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="testi-bg-quote">"</div>
+  <div class="reveal">
+    <div class="section-label"><div class="section-label-line"></div>Client Words</div>
+    <h2 class="section-title">What Our <em>Clients</em> Say</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal d1">
+      <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testi-text">"ZIS transformed our villa from a blank canvas into a stunning masterpiece. Their attention to detail and craftsmanship is truly unmatched in the UAE."</p>
+      <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Ahmed Al Mansoori</div><div class="testi-role">Villa Owner, Dubai Hills</div></div></div>
+    </div>
+    <div class="testi-card reveal d2">
+      <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testi-text">"The metal fabrication work they delivered for our showroom exceeded all expectations. Precise, beautiful, and completed well ahead of schedule."</p>
+      <div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Sarah Thompson</div><div class="testi-role">Director, Luxury Retail Group</div></div></div>
+    </div>
+    <div class="testi-card reveal d3">
+      <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testi-text">"From our office fitout to the landscaping of our outdoor terrace — ZIS handled everything flawlessly. One team, one vision, zero stress."</p>
+      <div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Mohammed Al Rashid</div><div class="testi-role">CEO, Property Development Firm</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-left reveal-left">
+    <div class="section-label"><div class="section-label-line"></div>Get In Touch</div>
+    <h2 class="section-title">Start Your<br><em>Project</em> Today</h2>
+    <p class="contact-desc">Ready to transform your space? Reach out for a free consultation. Our team will respond within 24 hours.</p>
+    <div class="contact-info">
+      <div class="contact-info-item">
+        <div class="contact-info-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.2 2 2 0 012.2 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg></div>
+        <div><div class="contact-info-label">Phone &amp; WhatsApp</div><a href="tel:+971565336465" class="contact-info-val">+971 56 533 6465</a></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon wa-icon"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.526 5.845L0 24l6.345-1.487A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.373l-.36-.214-3.724.873.946-3.618-.235-.372A9.792 9.792 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg></div>
+        <div><div class="contact-info-label">WhatsApp</div><a href="https://wa.me/971565336465" class="contact-info-val" target="_blank">Chat on WhatsApp</a></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="contact-info-label">Email</div><a href="mailto:hello@zis.ae" class="contact-info-val">hello@zis.ae</a></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="contact-info-label">Location</div><div class="contact-info-val">Dubai, United Arab Emirates</div></div>
+      </div>
+    </div>
+    <div class="social-row">
+      <a href="https://instagram.com/zisfitouts.ae" class="social-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @zisfitouts.ae
+      </a>
+      <a href="https://wa.me/971565336465" class="social-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.526 5.845L0 24l6.345-1.487A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.373l-.36-.214-3.724.873.946-3.618-.235-.372A9.792 9.792 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-form reveal-right">
+    <div class="form-row">
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+      <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+971"></div>
+    </div>
+    <div class="form-group"><label>Email Address</label><input type="email" placeholder="hello@example.com"></div>
+    <div class="form-group">
+      <label>Service Required</label>
+      <select>
+        <option value="">Select a service</option>
+        <option>Interior Fitouts</option>
+        <option>Metal Fabrication</option>
+        <option>Renovations</option>
+        <option>Landscaping</option>
+        <option>Carpentry &amp; Joinery</option>
+        <option>Multiple Services</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Project Details</label><textarea placeholder="Tell us about your project, timeline, and requirements…"></textarea></div>
+    <button class="form-submit" id="submitBtn">Send Enquiry →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="WhatsApp_Image_2026-01-20_at_12_12_53.jpeg" alt="ZIS Fitouts">
+      <p>Crafting exceptional spaces across the UAE since 2005. Interior fitouts, metal fabrication, renovations, landscaping, and carpentry — all under one roof.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Interior Fitouts</a></li>
+        <li><a href="#services">Metal Fabrication</a></li>
+        <li><a href="#services">Renovations</a></li>
+        <li><a href="#services">Landscaping</a></li>
+        <li><a href="#services">Carpentry &amp; Joinery</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact Us</div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.2 2 2 0 012.2 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg><a href="tel:+971565336465">+971 56 533 6465</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:hello@zis.ae">hello@zis.ae</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><a href="https://instagram.com/zisfitouts.ae" target="_blank">@zisfitouts.ae</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><a href="#">Dubai, UAE</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 ZIS Fitouts. All rights reserved.</div>
+    <div class="footer-grad-text">Crafting Spaces Since 2005</div>
+  </div>
+</footer>
+
+<script>
+// ── Custom Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+const interactables = 'a,button,.svc-card,.port-item,.stat-box,.why-feature,.testi-card,.step';
+document.querySelectorAll(interactables).forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('hovered'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('hovered'));
+});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+
+// ── Navbar
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);},{ passive:true });
+
+// ── Scroll Reveal
+const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(el=>obs.observe(el));
+
+// ── Counter Animation
+function animCount(el,target,suffix){
+  let start=0;const dur=1600;const step=timestamp=>{
+    if(!start)start=timestamp;
+    const prog=Math.min((timestamp-start)/dur,1);
+    const ease=1-Math.pow(1-prog,3);
+    el.textContent=Math.floor(ease*target)+(prog===1?'':'');
+    if(prog<1)requestAnimationFrame(step);else el.textContent=target;
+  };
+  requestAnimationFrame(step);
+}
+const countEls = document.querySelectorAll('.count-num');
+const countObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      animCount(e.target,parseInt(e.target.dataset.target));
+      countObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+countEls.forEach(el=>countObs.observe(el));
+
+// ── Form Submit
+document.getElementById('submitBtn').addEventListener('click',function(){
+  const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+  let filled = true; inputs.forEach(i=>{if(!i.value.trim())filled=false;});
+  if(!filled){this.textContent='Please fill all fields';this.style.opacity='0.6';setTimeout(()=>{this.textContent='Send Enquiry →';this.style.opacity='';},2500);return;}
+  this.textContent='Sending…';
+  setTimeout(()=>{
+    this.textContent='Message Sent ✓';
+    this.style.background='linear-gradient(135deg,#b8bcc8,#a0c9a0)';
+    setTimeout(()=>{this.textContent='Send Enquiry →';this.style.background='';},3500);
+  },1000);
+});
+
+// ── Hero parallax subtle
+window.addEventListener('scroll',()=>{
+  const hero=document.querySelector('.hero-bg img');
+  if(hero)hero.style.transform=`scale(1.06) translateY(${window.scrollY*0.04}px)`;
+},{passive:true});
+</script>
+</body>
+</html>
