@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZIS Fitouts – Since 2005 | Dubai</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#fff;--dark:#faf7f8;--card:#fff;--rg:#c97a9a;--rg2:#a85a7a;--rgl:#f0c0d5;--silver:#8a6070;--silverl:#e8b0cc;--white:#1a0a10;--muted:#9a7080;
+  --border:rgba(201,122,154,0.18);--borderl:rgba(201,122,154,0.35);--borders:rgba(201,122,154,0.2);
+  --grad:linear-gradient(135deg,#e8b0cc,#c0607a,#e8c0cc);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#fff;color:#1a0a10;font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* ── PAGE ROUTER ── */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;height:72px;
+  background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(201,122,154,0.2);
+  transition:background .3s;
+}
+.nav-logo{cursor:pointer;display:flex;align-items:center;}
+.nav-logo img{height:46px;object-fit:contain;}
+.nav-links{display:flex;gap:2.2rem;list-style:none;align-items:center;}
+.nav-links>li{position:relative;}
+.nav-links>li>a{
+  color:#8a5a6a;text-decoration:none;
+  font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  transition:color .3s;cursor:pointer;padding:.5rem 0;display:block;
+}
+.nav-links>li>a:hover,.nav-links>li>a.active-link{color:var(--rg);}
+.nav-dropdown{
+  position:absolute;top:100%;left:-1rem;
+  background:rgba(255,255,255,0.98);border:1px solid var(--border);
+  min-width:200px;padding:.5rem 0;
+  opacity:0;pointer-events:none;transform:translateY(8px);
+  transition:opacity .25s,transform .25s;
+}
+.nav-links>li:hover .nav-dropdown{opacity:1;pointer-events:all;transform:translateY(0);}
+.nav-dropdown a{
+  display:block;padding:.6rem 1.3rem;
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:#8a5a6a;text-decoration:none;cursor:pointer;
+  transition:color .2s,background .2s;
+}
+.nav-dropdown a:hover{color:var(--rg);background:rgba(201,149,106,.06);}
+.nav-cta{
+  background:transparent;border:1px solid #c97a9a;color:#c97a9a;
+  padding:.5rem 1.6rem;font-family:'Jost',sans-serif;
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  cursor:pointer;transition:all .3s;white-space:nowrap;
+}
+.nav-cta:hover{background:#c97a9a;color:#fff;}
+
+/* ── BUTTONS ── */
+.btn-rg{
+  background:linear-gradient(135deg,var(--rg),var(--rg2));
+  color:var(--black);border:none;padding:.8rem 2.4rem;
+  font-family:'Jost',sans-serif;font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;
+  cursor:pointer;transition:opacity .3s,transform .3s;display:inline-block;text-decoration:none;
+}
+.btn-rg:hover{opacity:.85;transform:translateY(-1px);}
+.btn-outline{
+  background:transparent;color:#8a5a6a;border:1px solid rgba(201,122,154,0.35);
+  padding:.8rem 2.4rem;font-family:'Jost',sans-serif;
+  font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;
+  cursor:pointer;transition:all .3s;display:inline-block;text-decoration:none;
+}
+.btn-outline:hover{border-color:#c97a9a;color:#c97a9a;}
+
+/* ── COMMON SECTION ── */
+.section{padding:6rem 5vw;}
+.section-tag{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--rg);margin-bottom:.8rem;}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.4rem);font-weight:300;line-height:1.12;color:#1a0a10;
+}
+.section-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.rule{width:56px;height:1px;background:linear-gradient(90deg,var(--rg),transparent);margin:1.4rem 0;}
+.center .rule{margin:1.4rem auto;}
+.text-muted{color:#9a7080;line-height:1.9;font-size:.93rem;}
+.max{max-width:1200px;margin:0 auto;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:0 5vw;
+}
+.hero-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(20,5,12,.55) 0%,rgba(20,5,12,.3) 50%,rgba(20,5,12,.75) 100%);
+}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:860px;}
+.hero-badge{
+  font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#f0c0d5;
+  margin-bottom:1.8rem;display:flex;align-items:center;justify-content:center;gap:.8rem;
+}
+.hero-badge::before,.hero-badge::after{content:'';width:36px;height:1px;background:var(--rg);opacity:.6;}
+.hero-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,7.5vw,6.5rem);font-weight:300;line-height:1.04;
+  margin-bottom:1.4rem;color:#fff;
+}
+.hero-h1 em{font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:1rem;color:rgba(20,5,12,.65);max-width:540px;margin:0 auto 2.5rem;line-height:1.8;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.hero-stats{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  display:flex;justify-content:center;
+  border-top:1px solid var(--border);
+  background:rgba(255,248,252,0.95);backdrop-filter:blur(8px);border-top:1px solid rgba(201,122,154,0.2);
+}
+.hstat{
+  padding:1.4rem 3.5rem;text-align:center;
+  border-right:1px solid var(--border);
+}
+.hstat:last-child{border-right:none;}
+.hstat-n{
+  font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;
+  background:linear-gradient(135deg,#c97a9a,#a85a7a);;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hstat-l{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#9a7080;margin-top:.2rem;}
+
+/* ── WHAT WE DO ── */
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(201,122,154,0.18);margin-top:3.5rem;
+}
+.svc{
+  background:#fff;padding:2.5rem 2rem;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:background .3s;
+}
+.svc::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--rg),var(--silverl));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s;
+}
+.svc:hover{background:#fff8fb;}
+.svc:hover::after{transform:scaleX(1);}
+.svc-num{font-size:.72rem;letter-spacing:.12em;color:var(--rg);margin-bottom:.8rem;}
+.svc-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin-bottom:.8rem;color:#1a0a10;}
+.svc-desc{font-size:.83rem;color:#9a7080;line-height:1.8;}
+.svc-arrow{
+  display:inline-block;margin-top:1.2rem;font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--rg);cursor:pointer;
+  transition:transform .3s;
+}
+.svc:hover .svc-arrow{transform:translateX(6px);}
+
+/* ── TURNKEY BAND ── */
+.band{
+  background:#faf7f8;padding:5rem 5vw;
+  display:flex;align-items:center;gap:5vw;flex-wrap:wrap;
+}
+.band-img{flex:1;min-width:280px;max-width:580px;aspect-ratio:16/10;overflow:hidden;}
+.band-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.band-text{flex:1;min-width:280px;}
+
+/* ── PROJECTS GRID ── */
+.proj-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(201,122,154,0.15);margin-top:3rem;
+}
+.proj{
+  position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer;background:#fff;
+}
+.proj.wide{grid-column:span 2;}
+.proj img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.proj:hover img{transform:scale(1.05);}
+.proj-over{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(20,5,12,.88) 0%,transparent 55%);
+  opacity:0;transition:opacity .35s;
+  display:flex;align-items:flex-end;padding:1.2rem;
+}
+.proj:hover .proj-over{opacity:1;}
+.proj-name{font-size:.9rem;font-weight:500;}
+.proj-loc{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rg);margin-top:.25rem;}
+
+/* ── SERVICE PAGE HERO ── */
+.sp-hero{
+  min-height:60vh;display:flex;align-items:flex-end;
+  position:relative;overflow:hidden;padding:4rem 5vw;
+  padding-top:100px;
+}
+.sp-hero-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+}
+.sp-hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(20,5,12,.92) 0%,rgba(20,5,12,.25) 60%,rgba(20,5,12,.35) 100%);
+}
+.sp-hero-content{position:relative;z-index:2;max-width:780px;}
+.sp-hero-tag{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--rg);margin-bottom:.8rem;}
+.sp-hero-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.4rem,5vw,4.5rem);font-weight:300;line-height:1.1;margin-bottom:1rem;color:#fff;
+}
+.sp-hero-sub{font-size:.95rem;color:rgba(20,5,12,.65);max-width:580px;line-height:1.8;}
+
+/* ── STATS ROW ── */
+.stats-row{
+  display:flex;flex-wrap:wrap;
+  border-top:1px solid var(--border);border-bottom:1px solid rgba(201,122,154,0.2);
+  background:#faf7f8;
+}
+.stat-item{
+  flex:1;padding:2rem 2.5rem;text-align:center;
+  border-right:1px solid var(--border);min-width:120px;
+}
+.stat-item:last-child{border-right:none;}
+.stat-n{
+  font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.stat-l{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#9a7080;margin-top:.3rem;}
+
+/* ── PROCESS STEPS ── */
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(201,122,154,0.15);margin-top:3rem;}
+.pstep{background:#fff;padding:2.2rem 1.8rem;}
+.pstep-n{
+  font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:.8rem;
+}
+.pstep-title{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#1a0a10;margin-bottom:.6rem;font-weight:500;}
+.pstep-desc{font-size:.8rem;color:#9a7080;line-height:1.8;}
+
+/* ── TWO COL ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.two-col.rev .col-img{order:-1;}
+.col-img{aspect-ratio:16/11;overflow:hidden;}
+.col-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.col-img-pair{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.col-img-pair img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;}
+
+/* ── BELIEF GRID ── */
+.belief-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem;}
+.belief-item{}
+.belief-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#1a0a10;margin-bottom:.5rem;}
+.belief-desc{font-size:.82rem;color:#9a7080;line-height:1.85;}
+
+/* ── FEATURED PROJECTS ── */
+.fp-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(201,122,154,0.15);margin-top:2.5rem;
+}
+.fp-item{
+  background:#fff;overflow:hidden;position:relative;aspect-ratio:4/3;cursor:pointer;
+}
+.fp-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.fp-item:hover img{transform:scale(1.06);}
+.fp-info{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(20,5,12,.85) 0%,transparent 55%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:1rem;
+  opacity:0;transition:opacity .3s;
+}
+.fp-item:hover .fp-info{opacity:1;}
+.fp-name{font-size:.85rem;font-weight:500;}
+.fp-area{font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--rg);margin-top:.2rem;}
+
+/* ── CONTACT ── */
+.contact-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:5rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.f-group{display:flex;flex-direction:column;gap:.45rem;margin-bottom:.9rem;}
+.f-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#9a7080;}
+.f-input{
+  background:#fff;border:1px solid var(--borders);
+  color:#1a0a10;padding:.8rem 1rem;
+  font-family:'Jost',sans-serif;font-size:.88rem;font-weight:300;
+  outline:none;transition:border-color .3s;width:100%;
+}
+.f-input:focus{border-color:var(--rg);}
+.f-input::placeholder{color:#9a7080;}
+textarea.f-input{height:110px;resize:none;}
+select.f-input{cursor:pointer;background:#fff;}
+.contact-info-box{padding-top:1rem;}
+.ci-item{margin-bottom:2rem;}
+.ci-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rg);margin-bottom:.4rem;}
+.ci-val{color:#8a5a6a;line-height:1.7;font-size:.93rem;}
+.ci-cta{border:1px solid var(--border);background:#fff;padding:2rem;margin-top:2.5rem;}
+.ci-cta p{font-size:.85rem;color:#9a7080;line-height:1.8;margin-top:.6rem;}
+
+/* ── FOOTER ── */
+footer{
+  background:#fff5f8;border-top:1px solid var(--border);
+  padding:2.5rem 5vw;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;
+}
+.ft-logo-text{
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:.1em;
+}
+.ft-since{font-size:.58rem;letter-spacing:.22em;color:#9a7080;text-transform:uppercase;margin-top:2px;}
+.ft-links{display:flex;gap:2rem;flex-wrap:wrap;}
+.ft-links a{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:#8a5a6a;text-decoration:none;cursor:pointer;transition:color .3s;}
+.ft-links a:hover{color:var(--rg);}
+.ft-copy{font-size:.7rem;color:rgba(154,112,128,.6);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.vis{opacity:1;transform:none;}
+
+/* ── ABOUT PAGE ── */
+.about-intro{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-nums{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,122,154,0.15);margin-top:3rem;}
+.an-item{background:#fff;padding:2.2rem;text-align:center;}
+.an-n{
+  font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.an-l{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#9a7080;margin-top:.4rem;}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,122,154,0.15);margin-top:2.5rem;}
+.val-item{background:#fff;padding:2.2rem 2rem;}
+.val-n{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--rg);margin-bottom:.6rem;}
+.val-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#1a0a10;margin-bottom:.6rem;}
+.val-desc{font-size:.8rem;color:#9a7080;line-height:1.85;}
+
+@media(max-width:900px){
+  nav{padding:0 4vw;}
+  .nav-links,.nav-cta{display:none;}
+  .hero-stats{flex-wrap:wrap;}
+  .hstat{padding:1rem 2rem;border-right:none;border-bottom:1px solid rgba(201,122,154,0.2);}
+  .services-grid,.proc-steps{grid-template-columns:1fr;}
+  .proj-grid,.fp-grid{grid-template-columns:1fr 1fr;}
+  .proj.wide{grid-column:span 2;}
+  .two-col,.about-intro,.contact-wrap{grid-template-columns:1fr;gap:2.5rem;}
+  .process-steps,.values-grid{grid-template-columns:1fr 1fr;}
+  .band{flex-direction:column;}
+  footer{justify-content:center;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <img id="nav-logo-img" src="data:image/png;base64,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" alt="ZIS Fitouts">
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home">Home</a></li>
+    <li>
+      <a id="nav-services">Our Services ▾</a>
+      <div class="nav-dropdown">
+        <a onclick="showPage('fitout')">Fitout Works</a>
+        <a onclick="showPage('metal')">Metal Fabrication</a>
+        <a onclick="showPage('structural')">Structural Works</a>
+        <a onclick="showPage('joinery')">Joinery Works</a>
+        <a onclick="showPage('renovation')">Full Renovation</a>
+        <a onclick="showPage('landscaping')">Landscaping</a>
+      </div>
+    </li>
+    <li><a onclick="showPage('portfolio')" id="nav-portfolio">Our Works</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="showPage('contact')">Get in Touch</button>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-bg" style="background-image:url('https://static.wixstatic.com/media/a97373_04d82a1b7f8246c8a3d26cd22ad31556f000.jpg/v1/fill/w_1920,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a97373_04d82a1b7f8246c8a3d26cd22ad31556f000.jpg')"></div>
+    <div class="hero-content reveal">
+      <div class="hero-badge">Since 2005 · Dubai, UAE</div>
+      <h1 class="hero-h1">We Build <em>Exceptional</em><br>Spaces</h1>
+      <p class="hero-sub" style="color:rgba(255,255,255,0.82);">Full-service fitout, metal fabrication, structural works, joinery, renovation &amp; landscaping across the UAE.</p>
+      <div class="hero-btns">
+        <button class="btn-rg" onclick="showPage('services-overview')">Explore Services</button>
+        <button class="btn-outline" onclick="showPage('portfolio')">View Our Work</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">20+</div><div class="hstat-l">Years Experience</div></div>
+      <div class="hstat"><div class="hstat-n">900+</div><div class="hstat-l">Projects Delivered</div></div>
+      <div class="hstat"><div class="hstat-n">4M</div><div class="hstat-l">Sq Ft Completed</div></div>
+      <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Core Services</div></div>
+    </div>
+  </div>
+
+  <!-- What We Do -->
+  <div class="section" style="background:#faf7f8;">
+    <div class="max">
+      <div style="text-align:center;" class="reveal">
+        <div class="section-tag">What We Do</div>
+        <h2 class="section-title">Sophisticated <span>Strategists</span></h2>
+        <div class="rule center"></div>
+        <p class="text-muted"  style="max-width:620px;margin:0 auto;">ZIS is a design-led fitout contractor focused on delivering intelligently crafted spaces. We are passionate about enhancing well-being, productivity, and the environments people live and work in.</p>
+      </div>
+      <div class="services-grid" style="margin-top:3.5rem;">
+        <div class="svc reveal" onclick="showPage('fitout')">
+          <div class="svc-num">01</div>
+          <div class="svc-title">Fitout Works</div>
+          <div class="svc-desc">End-to-end interior fitout for commercial, retail, hospitality &amp; residential spaces. From concept to completion, we are your single point of contact.</div>
+          <span class="svc-arrow">Learn More →</span>
+        </div>
+        <div class="svc reveal" onclick="showPage('metal')">
+          <div class="svc-num">02</div>
+          <div class="svc-title">Metal Fabrication</div>
+          <div class="svc-desc">Custom metalwork — structural steel, decorative elements, gates, staircases, and bespoke fabricated components built to exacting specifications.</div>
+          <span class="svc-arrow">Learn More →</span>
+        </div>
+        <div class="svc reveal" onclick="showPage('structural')">
+          <div class="svc-num">03</div>
+          <div class="svc-title">Structural Works</div>
+          <div class="svc-desc">Robust structural solutions including mezzanine floors, steel frameworks, load-bearing structures, and civil works executed with precision.</div>
+          <span class="svc-arrow">Learn More →</span>
+        </div>
+        <div class="svc reveal" onclick="showPage('joinery')">
+          <div class="svc-num">04</div>
+          <div class="svc-title">Joinery Works</div>
+          <div class="svc-desc">Premium custom joinery — wardrobes, cabinetry, reception desks, wall paneling &amp; bespoke furniture crafted from the finest materials.</div>
+          <span class="svc-arrow">Learn More →</span>
+        </div>
+        <div class="svc reveal" onclick="showPage('renovation')">
+          <div class="svc-num">05</div>
+          <div class="svc-title">Full Renovation</div>
+          <div class="svc-desc">Complete renovation services transforming existing spaces with modern design, updated infrastructure, and premium finishes across all property types.</div>
+          <span class="svc-arrow">Learn More →</span>
+        </div>
+        <div class="svc reveal" onclick="showPage('landscaping')">
+          <div class="svc-num">06</div>
+          <div class="svc-title">Landscaping</div>
+          <div class="svc-desc">Creative outdoor design, garden landscaping, hardscaping, irrigation systems, and outdoor living spaces for villas and commercial properties.</div>
+          <span class="svc-arrow">Learn More →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Turnkey Band -->
+  <div class="band">
+    <div class="band-img reveal">
+      <img src="https://static.wixstatic.com/media/0ce3c1_519db8b951454266972adb539f9370dc~mv2.jpg/v1/fill/w_900,h_600,al_c,q_85,enc_avif,quality_auto/0ce3c1_519db8b951454266972adb539f9370dc~mv2.jpg" alt="ZIS workspace">
+    </div>
+    <div class="band-text reveal">
+      <div class="section-tag">Turnkey Solutions</div>
+      <h2 class="section-title">360° <span>Complete</span> Service</h2>
+      <div class="rule"></div>
+      <p class="text-muted"  style="margin-bottom:1.2rem;">We handle every step of your project journey — from design to construction — so you can focus on your business while our team takes care of everything. Our parallel working approach ensures smooth progress by managing different project stages simultaneously.</p>
+      <p class="text-muted"  style="margin-bottom:2rem;">No two projects are the same. We spend time understanding your needs, so we can plan spaces that cater to you and your future growth.</p>
+      <button class="btn-rg" onclick="showPage('contact')">Start Your Project</button>
+    </div>
+  </div>
+
+  <!-- Featured Projects -->
+  <div class="section">
+    <div class="max">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;" class="reveal">
+        <div>
+          <div class="section-tag">Our Work</div>
+          <h2 class="section-title">Featured <span>Projects</span></h2>
+          <div class="rule"></div>
+        </div>
+        <button class="btn-outline" onclick="showPage('portfolio')">View All Projects →</button>
+      </div>
+      <div class="proj-grid">
+        <div class="proj wide reveal">
+          <img src="https://static.wixstatic.com/media/a97373_6083bd0aa308479cb562d462af96e491~mv2.jpg/v1/fill/w_900,h_525,q_85,enc_avif,quality_auto/a97373_6083bd0aa308479cb562d462af96e491~mv2.jpg" alt="Eanan">
+          <div class="proj-over"><div><div class="proj-name">Eanan</div><div class="proj-loc">DIP 2, Dubai · 40,000 sq ft</div></div></div>
+        </div>
+        <div class="proj reveal">
+          <img src="https://static.wixstatic.com/media/0ce3c1_52bd02f0b8ce40589efd175dbcf5a19f~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_52bd02f0b8ce40589efd175dbcf5a19f~mv2.jpg" alt="Kitopi">
+          <div class="proj-over"><div><div class="proj-name">Kitopi</div><div class="proj-loc">One Central · 23,000 sq ft</div></div></div>
+        </div>
+        <div class="proj reveal">
+          <img src="https://static.wixstatic.com/media/0ce3c1_7fa7c104bf994037aa5124ddecffdd8f~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_7fa7c104bf994037aa5124ddecffdd8f~mv2.jpg" alt="Servier">
+          <div class="proj-over"><div><div class="proj-name">Servier</div><div class="proj-loc">Dubai Science Park · 12,000 sq ft</div></div></div>
+        </div>
+        <div class="proj reveal">
+          <img src="https://static.wixstatic.com/media/0ce3c1_b5d68cde44d9466f9edd86227b59daf1~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_b5d68cde44d9466f9edd86227b59daf1~mv2.jpg" alt="Veolia">
+          <div class="proj-over"><div><div class="proj-name">Veolia</div><div class="proj-loc">Business Bay · 23,000 sq ft</div></div></div>
+        </div>
+        <div class="proj reveal">
+          <img src="https://static.wixstatic.com/media/0ce3c1_d8e3ffdb1d814a7c81436f94d2d5bae0~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_d8e3ffdb1d814a7c81436f94d2d5bae0~mv2.jpg" alt="The Luxe Developers">
+          <div class="proj-over"><div><div class="proj-name">The Luxe Developers</div><div class="proj-loc">Business Bay · 12,000 sq ft</div></div></div>
+        </div>
+        <div class="proj reveal">
+          <img src="https://static.wixstatic.com/media/0ce3c1_75be93e8a2134156816bf7fdfe4b8f2f~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_75be93e8a2134156816bf7fdfe4b8f2f~mv2.jpg" alt="Cisco">
+          <div class="proj-over"><div><div class="proj-name">Cisco</div><div class="proj-loc">EXPO · 9,533 sq ft</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="background:#faf7f8;padding:5rem 5vw;text-align:center;">
+    <div class="reveal">
+      <div class="section-tag">Let's Build Together</div>
+      <h2 class="section-title" style="margin-bottom:1.5rem;">Ready to <span>Transform</span> Your Space?</h2>
+      <p class="text-muted"  style="max-width:500px;margin:0 auto 2.5rem;">We'd love to hear about your project. Let's have a conversation about what's possible.</p>
+      <button class="btn-rg" onclick="showPage('contact')">Get in Touch</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <div class="ft-logo-text">ZIS FITOUTS</div>
+      <div class="ft-since">Since 2005 · Dubai, UAE</div>
+    </div>
+    <div class="ft-links">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('fitout')">Fitout</a>
+      <a onclick="showPage('joinery')">Joinery</a>
+      <a onclick="showPage('portfolio')">Our Works</a>
+      <a onclick="showPage('about')">About</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+    <div class="ft-copy">© 2025 ZIS Fitouts LLC. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     FITOUT PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-fitout">
+  <div class="sp-hero">
+    <div class="sp-hero-bg" style="background-image:url('https://static.wixstatic.com/media/0ce3c1_dd7ff6e77bb14ba89f06ce33f92f733df000.jpg/v1/fill/w_1920,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0ce3c1_dd7ff6e77bb14ba89f06ce33f92f733df000.jpg')"></div>
+    <div class="sp-hero-content reveal">
+      <div class="sp-hero-tag">Our Services</div>
+      <h1 class="sp-hero-h1">Fitout Works<br><em style="font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Shaping Workspaces That Inspire</em></h1>
+      <p class="sp-hero-sub" style="color:rgba(255,255,255,0.85);">Whether you are refurbishing or relocating, we offer a complete solution to your entire fitout process — from concept to completion, we are your single point of contact.</p>
+      <div style="margin-top:2rem;"><button class="btn-rg" onclick="showPage('contact')">Let's Talk</button></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-n">20+</div><div class="stat-l">Years</div></div>
+    <div class="stat-item"><div class="stat-n">900+</div><div class="stat-l">Projects</div></div>
+    <div class="stat-item"><div class="stat-n">4M</div><div class="stat-l">Sq Ft</div></div>
+  </div>
+
+  <div class="section" style="background:#faf7f8;">
+    <div class="max two-col reveal">
+      <div>
+        <div class="section-tag">More Than Just a Fitout</div>
+        <h2 class="section-title">The <span>Workplace</span> Experience</h2>
+        <div class="rule"></div>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">When you work with us, we make you a promise — to deliver your fitout with no fuss. We oversee everything through your design and build journey, so you can relax knowing our team is by your side.</p>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">Our parallel working approach means we manage different stages of your project simultaneously — reducing handover and downtime between milestones.</p>
+        <p class="text-muted" >An office is a hub where ideas are exchanged, relationships are established, and goals are attained. We help you build that hub.</p>
+      </div>
+      <div class="col-img">
+        <img src="https://static.wixstatic.com/media/0ce3c1_cfd8da6ab9f4426ebf0e51137656c691~mv2.jpg/v1/fill/w_900,h_600,al_c,q_85,enc_avif,quality_auto/0ce3c1_cfd8da6ab9f4426ebf0e51137656c691~mv2.jpg" alt="Fitout workspace">
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="max">
+      <div class="reveal" style="text-align:center;margin-bottom:1rem;">
+        <div class="section-tag">Our Approach</div>
+        <h2 class="section-title">The <span>Fitout</span> Process</h2>
+        <div class="rule center"></div>
+      </div>
+      <div class="process-steps reveal">
+        <div class="pstep"><div class="pstep-n">01</div><div class="pstep-title">Detail Drawings</div><div class="pstep-desc">We produce technical drawings for authority approvals and site execution, presented live for your sign-off.</div></div>
+        <div class="pstep"><div class="pstep-n">02</div><div class="pstep-title">Material Selection</div><div class="pstep-desc">Finalized material listing approved by you before any work begins — complete transparency at every step.</div></div>
+        <div class="pstep"><div class="pstep-n">03</div><div class="pstep-title">Construction</div><div class="pstep-desc">Our in-house team executes with precision, managing MEP, joinery, furniture, and finishes simultaneously.</div></div>
+        <div class="pstep"><div class="pstep-n">04</div><div class="pstep-title">Handover & Aftercare</div><div class="pstep-desc">We hand over on time and our dedicated aftercare team stays with you long after project completion.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#faf7f8;">
+    <div class="max">
+      <div class="reveal"><div class="section-tag">Featured Projects</div><h2 class="section-title">Recent <span>Fitout Work</span></h2><div class="rule"></div></div>
+      <div class="fp-grid">
+        <div class="fp-item reveal"><img src="https://static.wixstatic.com/media/0ce3c1_52bd02f0b8ce40589efd175dbcf5a19f~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_52bd02f0b8ce40589efd175dbcf5a19f~mv2.jpg" alt="Kitopi"><div class="fp-info"><div class="fp-name">Kitopi</div><div class="fp-area">One Central · 23,000 sq ft</div></div></div>
+        <div class="fp-item reveal"><img src="https://static.wixstatic.com/media/0ce3c1_1b4d6ae8f64d4a8e979c160da9661fdd~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_1b4d6ae8f64d4a8e979c160da9661fdd~mv2.jpg" alt="BRG"><div class="fp-info"><div class="fp-name">BRG</div><div class="fp-area">One Central · 4,500 sq ft</div></div></div>
+        <div class="fp-item reveal"><img src="https://static.wixstatic.com/media/0ce3c1_f68107ae2c5e4ff594da49ab788ab8eb~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_f68107ae2c5e4ff594da49ab788ab8eb~mv2.jpg" alt="Green Food"><div class="fp-info"><div class="fp-name">Green Food Supplies</div><div class="fp-area">Barsha Heights · 10,000 sq ft</div></div></div>
+        <div class="fp-item reveal"><img src="https://static.wixstatic.com/media/0ce3c1_75be93e8a2134156816bf7fdfe4b8f2f~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_75be93e8a2134156816bf7fdfe4b8f2f~mv2.jpg" alt="Cisco"><div class="fp-info"><div class="fp-name">Cisco</div><div class="fp-area">EXPO · 9,533 sq ft</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div id="fitout-footer"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     METAL FABRICATION PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-metal">
+  <div class="sp-hero">
+    <div class="sp-hero-bg" style="background-image:url('https://static.wixstatic.com/media/0ce3c1_ebe01f01829b47668153cd21fda19d65f000.jpg/v1/fill/w_1920,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0ce3c1_ebe01f01829b47668153cd21fda19d65f000.jpg')"></div>
+    <div class="sp-hero-content reveal">
+      <div class="sp-hero-tag">Our Services</div>
+      <h1 class="sp-hero-h1">Metal <em style="font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Fabrication</em></h1>
+      <p class="sp-hero-sub" style="color:rgba(255,255,255,0.85);">Custom metalwork for structural and decorative applications — gates, staircases, cladding, balustrades, and bespoke fabricated components built to specification.</p>
+      <div style="margin-top:2rem;"><button class="btn-rg" onclick="showPage('contact')">Let's Talk</button></div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-n">20+</div><div class="stat-l">Years</div></div>
+    <div class="stat-item"><div class="stat-n">900+</div><div class="stat-l">Projects</div></div>
+    <div class="stat-item"><div class="stat-n">4M</div><div class="stat-l">Sq Ft</div></div>
+  </div>
+  <div class="section" style="background:#faf7f8;">
+    <div class="max two-col reveal">
+      <div>
+        <div class="section-tag">Precision Craftsmanship</div>
+        <h2 class="section-title">Built to <span>Last</span></h2>
+        <div class="rule"></div>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">Our metal fabrication workshop operates with cutting-edge machinery and skilled artisans who bring precision engineering to every project. From lightweight decorative screens to heavy structural steel, we handle it all.</p>
+        <p class="text-muted"  style="margin-bottom:2rem;">We work across commercial and residential sectors — whether it's a bespoke reception feature wall, an external steel canopy, or full structural steel framework.</p>
+        <button class="btn-rg" onclick="showPage('contact')">Discuss Your Project</button>
+      </div>
+      <div class="col-img"><img src="https://static.wixstatic.com/media/0ce3c1_567c8309ff9c4295a1c64fe0bedfb30f~mv2.jpg/v1/fill/w_900,h_600,al_c,q_85,enc_avif,quality_auto/0ce3c1_567c8309ff9c4295a1c64fe0bedfb30f~mv2.jpg" alt="Metal fabrication"></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="max">
+      <div class="reveal"><div class="section-tag">What We Fabricate</div><h2 class="section-title">Our <span>Capabilities</span></h2><div class="rule"></div></div>
+      <div class="process-steps reveal">
+        <div class="pstep"><div class="pstep-n">✦</div><div class="pstep-title">Structural Steel</div><div class="pstep-desc">Beams, columns, mezzanines, and frameworks engineered for load-bearing performance.</div></div>
+        <div class="pstep"><div class="pstep-n">✦</div><div class="pstep-title">Staircases & Railings</div><div class="pstep-desc">Custom-designed staircases, balustrades, and handrails in steel, glass, and combinations.</div></div>
+        <div class="pstep"><div class="pstep-n">✦</div><div class="pstep-title">Cladding & Screens</div><div class="pstep-desc">Decorative metal panels, perforated screens, and cladding systems for facades and interiors.</div></div>
+        <div class="pstep"><div class="pstep-n">✦</div><div class="pstep-title">Gates & Doors</div><div class="pstep-desc">Security gates, entrance doors, and automated systems tailored to your requirements.</div></div>
+      </div>
+    </div>
+  </div>
+  <div id="metal-footer"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     STRUCTURAL WORKS PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-structural">
+  <div class="sp-hero">
+    <div class="sp-hero-bg" style="background-image:url('https://static.wixstatic.com/media/0ce3c1_dd7ff6e77bb14ba89f06ce33f92f733df000.jpg/v1/fill/w_1920,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0ce3c1_dd7ff6e77bb14ba89f06ce33f92f733df000.jpg')"></div>
+    <div class="sp-hero-content reveal">
+      <div class="sp-hero-tag">Our Services</div>
+      <h1 class="sp-hero-h1">Structural <em style="font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Works</em></h1>
+      <p class="sp-hero-sub" style="color:rgba(255,255,255,0.85);">Robust structural solutions — mezzanine floors, steel frameworks, load-bearing structures, and civil works executed with engineering precision and full authority compliance.</p>
+      <div style="margin-top:2rem;"><button class="btn-rg" onclick="showPage('contact')">Let's Talk</button></div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-n">20+</div><div class="stat-l">Years</div></div>
+    <div class="stat-item"><div class="stat-n">900+</div><div class="stat-l">Projects</div></div>
+    <div class="stat-item"><div class="stat-n">4M</div><div class="stat-l">Sq Ft</div></div>
+  </div>
+  <div class="section" style="background:#faf7f8;">
+    <div class="max two-col reveal">
+      <div>
+        <div class="section-tag">Engineering Excellence</div>
+        <h2 class="section-title">Built on <span>Solid Foundations</span></h2>
+        <div class="rule"></div>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">Our structural works team combines engineering expertise with hands-on site experience. We handle everything from initial design and authority approvals through to construction and handover.</p>
+        <p class="text-muted"  style="margin-bottom:2rem;">Every structural project is managed by experienced engineers who ensure safety, quality, and full compliance with Dubai municipality and free zone authority requirements.</p>
+        <button class="btn-rg" onclick="showPage('contact')">Discuss Your Project</button>
+      </div>
+      <div class="col-img"><img src="https://static.wixstatic.com/media/a97373_87f2038fd7634cf9a2c67fe15357ecc5~mv2.jpg/v1/fill/w_900,h_600,al_c,q_85,enc_avif,quality_auto/a97373_87f2038fd7634cf9a2c67fe15357ecc5~mv2.jpg" alt="Structural works"></div>
+    </div>
+  </div>
+  <div id="structural-footer"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     JOINERY PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-joinery">
+  <div class="sp-hero">
+    <div class="sp-hero-bg" style="background-image:url('https://static.wixstatic.com/media/0ce3c1_ddc7953678134a3e99216b679a26cec6f000.jpg/v1/fill/w_1920,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0ce3c1_ddc7953678134a3e99216b679a26cec6f000.jpg')"></div>
+    <div class="sp-hero-content reveal">
+      <div class="sp-hero-tag">Our Services</div>
+      <h1 class="sp-hero-h1">Joinery <em style="font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Works</em></h1>
+      <p class="sp-hero-sub" style="color:rgba(255,255,255,0.85);">Operating in a variety of commercial sectors, our joinery specialists and cutting-edge machinery deliver any project in the most efficient and cost-effective way — without compromising on quality.</p>
+      <div style="margin-top:2rem;"><button class="btn-rg" onclick="showPage('contact')">Let's Talk</button></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-n">20+</div><div class="stat-l">Years</div></div>
+    <div class="stat-item"><div class="stat-n">900+</div><div class="stat-l">Projects</div></div>
+    <div class="stat-item"><div class="stat-n">4M</div><div class="stat-l">Sq Ft</div></div>
+  </div>
+
+  <div class="section" style="background:#faf7f8;">
+    <div class="max two-col reveal">
+      <div>
+        <div class="section-tag">Expert Craftsmanship</div>
+        <h2 class="section-title">Why Our <span>Experience</span> is Key</h2>
+        <div class="rule"></div>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">Our joiners have over 19 years of combined experience working on bespoke joinery projects, allowing us to fine-tune our processes and deliver the best customer experience.</p>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">We offer business owners a fully bespoke concept-to-completion service, and provide architects, designers, and construction professionals the ability to transform their ideas from concept into reality.</p>
+        <p class="text-muted"  style="margin-bottom:2rem;">We take great care to truly understand our clients — which is why we are able to create a product that is completely unique and realizes your dreams and ambitions.</p>
+        <button class="btn-rg" onclick="showPage('contact')">Discuss Your Project</button>
+      </div>
+      <div class="col-img">
+        <img src="https://static.wixstatic.com/media/aa5a6a80f5b64a94a242e0c518d315ca.jpg/v1/fill/w_900,h_600,al_c,q_85,enc_avif,quality_auto/aa5a6a80f5b64a94a242e0c518d315ca.jpg" alt="Joinery">
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="max">
+      <div class="reveal"><div class="section-tag">Featured Projects</div><h2 class="section-title">Recent <span>Joinery Work</span></h2><div class="rule"></div></div>
+      <div class="fp-grid">
+        <div class="fp-item reveal"><img src="https://static.wixstatic.com/media/0ce3c1_52bd02f0b8ce40589efd175dbcf5a19f~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_52bd02f0b8ce40589efd175dbcf5a19f~mv2.jpg" alt="Kitopi"><div class="fp-info"><div class="fp-name">Kitopi</div><div class="fp-area">One Central · 23,000 sq ft</div></div></div>
+        <div class="fp-item reveal"><img src="https://static.wixstatic.com/media/0ce3c1_7fa7c104bf994037aa5124ddecffdd8f~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_7fa7c104bf994037aa5124ddecffdd8f~mv2.jpg" alt="Servier"><div class="fp-info"><div class="fp-name">Servier</div><div class="fp-area">Dubai Science Park · 12,000 sq ft</div></div></div>
+        <div class="fp-item reveal"><img src="https://static.wixstatic.com/media/0ce3c1_eaed0bf4e92242f09d9c5bf10945c426~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_eaed0bf4e92242f09d9c5bf10945c426~mv2.jpg" alt="Russell Reynolds"><div class="fp-info"><div class="fp-name">Russell Reynolds</div><div class="fp-area">Burj Daman · 5,050 sq ft</div></div></div>
+        <div class="fp-item reveal"><img src="https://static.wixstatic.com/media/0ce3c1_b5d68cde44d9466f9edd86227b59daf1~mv2.jpg/v1/fill/w_700,h_525,q_85,enc_avif,quality_auto/0ce3c1_b5d68cde44d9466f9edd86227b59daf1~mv2.jpg" alt="Veolia"><div class="fp-info"><div class="fp-name">Veolia</div><div class="fp-area">Business Bay · 23,000 sq ft</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div id="joinery-footer"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     RENOVATION PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-renovation">
+  <div class="sp-hero">
+    <div class="sp-hero-bg" style="background-image:url('https://static.wixstatic.com/media/0ce3c1_c779c45cc4c44dc580af8ab339a46a38f000.jpg/v1/fill/w_1920,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0ce3c1_c779c45cc4c44dc580af8ab339a46a38f000.jpg')"></div>
+    <div class="sp-hero-content reveal">
+      <div class="sp-hero-tag">Our Services</div>
+      <h1 class="sp-hero-h1">Full <em style="font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Renovation</em></h1>
+      <p class="sp-hero-sub" style="color:rgba(255,255,255,0.85);">End-to-end renovation services transforming existing spaces with modern design, updated infrastructure, and premium finishes across all property types in the UAE.</p>
+      <div style="margin-top:2rem;"><button class="btn-rg" onclick="showPage('contact')">Let's Talk</button></div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-n">20+</div><div class="stat-l">Years</div></div>
+    <div class="stat-item"><div class="stat-n">900+</div><div class="stat-l">Projects</div></div>
+    <div class="stat-item"><div class="stat-n">4M</div><div class="stat-l">Sq Ft</div></div>
+  </div>
+  <div class="section" style="background:#faf7f8;">
+    <div class="max two-col reveal">
+      <div>
+        <div class="section-tag">Transform Your Space</div>
+        <h2 class="section-title">Complete <span>Renovation</span> Solutions</h2>
+        <div class="rule"></div>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">From a single room refresh to a complete building overhaul, ZIS Fitouts manages every aspect of your renovation. We coordinate all trades — civil, MEP, finishes, and furniture — under one roof.</p>
+        <p class="text-muted"  style="margin-bottom:2rem;">Our experienced project managers ensure minimal disruption to your operations while delivering a transformed space on time and within budget.</p>
+        <button class="btn-rg" onclick="showPage('contact')">Discuss Your Project</button>
+      </div>
+      <div class="col-img"><img src="https://static.wixstatic.com/media/11062b_14ffa507b39e46e1a19d46fc7c82599d~mv2.jpg/v1/fill/w_900,h_600,al_c,q_85,enc_avif,quality_auto/11062b_14ffa507b39e46e1a19d46fc7c82599d~mv2.jpg" alt="Renovation"></div>
+    </div>
+  </div>
+  <div id="renovation-footer"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     LANDSCAPING PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-landscaping">
+  <div class="sp-hero">
+    <div class="sp-hero-bg" style="background-image:url('https://static.wixstatic.com/media/a97373_04d82a1b7f8246c8a3d26cd22ad31556f000.jpg/v1/fill/w_1920,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a97373_04d82a1b7f8246c8a3d26cd22ad31556f000.jpg')"></div>
+    <div class="sp-hero-content reveal">
+      <div class="sp-hero-tag">Our Services</div>
+      <h1 class="sp-hero-h1"><em style="font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Landscaping</em></h1>
+      <p class="sp-hero-sub" style="color:rgba(255,255,255,0.85);">Creative outdoor design and landscaping solutions — garden design, hardscaping, irrigation, and outdoor living spaces for villas and commercial properties across the UAE.</p>
+      <div style="margin-top:2rem;"><button class="btn-rg" onclick="showPage('contact')">Let's Talk</button></div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-n">20+</div><div class="stat-l">Years</div></div>
+    <div class="stat-item"><div class="stat-n">900+</div><div class="stat-l">Projects</div></div>
+    <div class="stat-item"><div class="stat-n">4M</div><div class="stat-l">Sq Ft</div></div>
+  </div>
+  <div class="section" style="background:#faf7f8;">
+    <div class="max two-col reveal">
+      <div>
+        <div class="section-tag">Outdoor Excellence</div>
+        <h2 class="section-title">Bringing <span>Nature</span> to Life</h2>
+        <div class="rule"></div>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">Our landscaping team designs and builds stunning outdoor environments that complement and enhance the architecture they surround. From lush gardens to clean minimalist hardscapes, we create spaces that inspire.</p>
+        <p class="text-muted"  style="margin-bottom:2rem;">We handle everything from concept through to maintenance planning — planting design, irrigation systems, lighting, water features, and all hardscape elements.</p>
+        <button class="btn-rg" onclick="showPage('contact')">Discuss Your Project</button>
+      </div>
+      <div class="col-img"><img src="https://static.wixstatic.com/media/0ce3c1_d0850de9a26c4412874ecf6dc3f434e9~mv2.jpg/v1/fill/w_900,h_600,al_c,q_85,enc_avif,quality_auto/0ce3c1_d0850de9a26c4412874ecf6dc3f434e9~mv2.jpg" alt="Landscaping"></div>
+    </div>
+  </div>
+  <div id="landscaping-footer"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PORTFOLIO PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-portfolio">
+  <div style="padding-top:72px;background:#faf7f8;">
+    <div class="section">
+      <div class="max">
+        <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+          <div class="section-tag">Our Work</div>
+          <h1 class="section-title">All <span>Projects</span></h1>
+          <div class="rule center"></div>
+          <p class="text-muted"  style="max-width:500px;margin:0 auto;">Over 900 projects delivered across the UAE — commercial, residential, hospitality, and industrial.</p>
+        </div>
+        <div class="proj-grid" style="grid-template-columns:repeat(4,1fr);">
+          <div class="proj wide reveal"><img src="https://static.wixstatic.com/media/a97373_6083bd0aa308479cb562d462af96e491~mv2.jpg/v1/fill/w_900,h_525,q_85,enc_avif,quality_auto/a97373_6083bd0aa308479cb562d462af96e491~mv2.jpg" alt="Eanan"><div class="proj-over"><div><div class="proj-name">Eanan</div><div class="proj-loc">DIP 2, Dubai · 40,000 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_52bd02f0b8ce40589efd175dbcf5a19f~mv2.jpg" alt="Kitopi"><div class="proj-over"><div><div class="proj-name">Kitopi</div><div class="proj-loc">One Central · 23,000 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/a97373_0d6b5c164c5e466b9df567a76c4390da~mv2.jpg" alt="AG&P"><div class="proj-over"><div><div class="proj-name">AG&amp;P</div><div class="proj-loc">Dubai Media City · 4,805 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_f68107ae2c5e4ff594da49ab788ab8eb~mv2.jpg" alt="Green Food"><div class="proj-over"><div><div class="proj-name">Green Food Supplies</div><div class="proj-loc">Barsha Heights · 10,000 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_7fa7c104bf994037aa5124ddecffdd8f~mv2.jpg" alt="Servier"><div class="proj-over"><div><div class="proj-name">Servier</div><div class="proj-loc">Dubai Science Park · 12,000 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_d8e3ffdb1d814a7c81436f94d2d5bae0~mv2.jpg" alt="The Luxe Developers"><div class="proj-over"><div><div class="proj-name">The Luxe Developers</div><div class="proj-loc">Business Bay · 12,000 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_b5d68cde44d9466f9edd86227b59daf1~mv2.jpg" alt="Veolia"><div class="proj-over"><div><div class="proj-name">Veolia</div><div class="proj-loc">Business Bay · 23,000 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_75be93e8a2134156816bf7fdfe4b8f2f~mv2.jpg" alt="Cisco"><div class="proj-over"><div><div class="proj-name">Cisco</div><div class="proj-loc">EXPO · 9,533 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_eaed0bf4e92242f09d9c5bf10945c426~mv2.jpg" alt="Russell Reynolds"><div class="proj-over"><div><div class="proj-name">Russell Reynolds</div><div class="proj-loc">Burj Daman · 5,050 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_711ec75f6db94cd59863c1eff9afc180~mv2.jpg" alt="Grant Thornton"><div class="proj-over"><div><div class="proj-name">Grant Thornton</div><div class="proj-loc">One Central · 28,000 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_411affcc7d9047ebb89bd0be9ce95c35~mv2.jpg" alt="Boston Scientific"><div class="proj-over"><div><div class="proj-name">Boston Scientific</div><div class="proj-loc">Dubai Science Park · 12,500 sq ft</div></div></div></div>
+          <div class="proj reveal"><img src="https://static.wixstatic.com/media/0ce3c1_1b4d6ae8f64d4a8e979c160da9661fdd~mv2.jpg" alt="BRG"><div class="proj-over"><div><div class="proj-name">BRG</div><div class="proj-loc">One Central · 4,500 sq ft</div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div><div class="ft-logo-text">ZIS FITOUTS</div><div class="ft-since">Since 2005 · Dubai, UAE</div></div>
+    <div class="ft-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('fitout')">Fitout</a><a onclick="showPage('portfolio')">Our Works</a><a onclick="showPage('about')">About</a><a onclick="showPage('contact')">Contact</a></div>
+    <div class="ft-copy">© 2025 ZIS Fitouts LLC.</div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="sp-hero" style="min-height:50vh;">
+    <div class="sp-hero-bg" style="background-image:url('https://static.wixstatic.com/media/0ce3c1_519db8b951454266972adb539f9370dc~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_85,enc_avif,quality_auto/0ce3c1_519db8b951454266972adb539f9370dc~mv2.jpg')"></div>
+    <div class="sp-hero-content reveal">
+      <div class="sp-hero-tag">Who We Are</div>
+      <h1 class="sp-hero-h1">About <em style="font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">ZIS Fitouts</em></h1>
+      <p class="sp-hero-sub" style="color:rgba(255,255,255,0.85);">Building exceptional spaces across the UAE since 2005. A team driven by craft, integrity, and a genuine passion for transforming environments.</p>
+    </div>
+  </div>
+
+  <div class="section" style="background:#faf7f8;">
+    <div class="max about-intro reveal">
+      <div>
+        <div class="section-tag">Our Story</div>
+        <h2 class="section-title">Two Decades of <span>Excellence</span></h2>
+        <div class="rule"></div>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">Founded in 2005, ZIS Fitouts has grown from a specialist fitout contractor into a comprehensive construction and interior services company covering the full spectrum of fitout, fabrication, structural, joinery, renovation, and landscaping.</p>
+        <p class="text-muted"  style="margin-bottom:1.2rem;">Over the past 20 years we have built a reputation for delivering projects that exceed expectations — on time, on budget, and built to last. Our clients range from multinational corporations to private villa owners, and we bring the same commitment to quality to every single one.</p>
+        <p class="text-muted" >We are passionate about creating spaces where people feel inspired. Every project is approached with fresh eyes, deep listening, and a commitment to understanding what truly matters to our clients.</p>
+      </div>
+      <div class="about-nums" style="background:transparent;">
+        <div class="an-item"><div class="an-n">20+</div><div class="an-l">Years in UAE</div></div>
+        <div class="an-item"><div class="an-n">900+</div><div class="an-l">Projects Done</div></div>
+        <div class="an-item"><div class="an-n">4M</div><div class="an-l">Sq Ft Completed</div></div>
+        <div class="an-item"><div class="an-n">6</div><div class="an-l">Core Services</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="max">
+      <div class="reveal" style="text-align:center;margin-bottom:1rem;">
+        <div class="section-tag">What We Stand For</div>
+        <h2 class="section-title">Our <span>Values</span></h2>
+        <div class="rule center"></div>
+      </div>
+      <div class="values-grid reveal">
+        <div class="val-item"><div class="val-n">01</div><div class="val-title">Craftsmanship</div><div class="val-desc">We take pride in every detail. From the first nail to the final finish, quality is non-negotiable at ZIS.</div></div>
+        <div class="val-item"><div class="val-n">02</div><div class="val-title">Integrity</div><div class="val-desc">Honest communication, transparent pricing, and reliable delivery — we do what we say, every time.</div></div>
+        <div class="val-item"><div class="val-n">03</div><div class="val-title">Innovation</div><div class="val-desc">We embrace new materials, technologies, and ideas to continuously improve how we build and design.</div></div>
+        <div class="val-item"><div class="val-n">04</div><div class="val-title">Partnership</div><div class="val-desc">Our relationship doesn't end at handover. We stay with our clients long after the project is complete.</div></div>
+        <div class="val-item"><div class="val-n">05</div><div class="val-title">People First</div><div class="val-desc">We believe that great spaces start with great people. Our team is our biggest asset.</div></div>
+        <div class="val-item"><div class="val-n">06</div><div class="val-title">Passion</div><div class="val-desc">We love what we do. That passion shows in the quality of everything we create.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#faf7f8;padding:5rem 5vw;text-align:center;" class="reveal">
+    <div class="section-tag">Let's Work Together</div>
+    <h2 class="section-title" style="margin-bottom:1.5rem;">Ready to <span>Start</span>?</h2>
+    <p class="text-muted"  style="max-width:480px;margin:0 auto 2.5rem;">We'd love to hear about your next project. Let's have a conversation.</p>
+    <button class="btn-rg" onclick="showPage('contact')">Get in Touch</button>
+  </div>
+
+  <footer>
+    <div><div class="ft-logo-text">ZIS FITOUTS</div><div class="ft-since">Since 2005 · Dubai, UAE</div></div>
+    <div class="ft-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('fitout')">Fitout</a><a onclick="showPage('portfolio')">Our Works</a><a onclick="showPage('about')">About</a><a onclick="showPage('contact')">Contact</a></div>
+    <div class="ft-copy">© 2025 ZIS Fitouts LLC.</div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div style="padding-top:72px;background:#faf7f8;min-height:100vh;">
+    <div class="section">
+      <div class="max contact-wrap">
+        <div class="reveal">
+          <div class="section-tag">Get In Touch</div>
+          <h1 class="section-title">Start Your <span>Project</span></h1>
+          <div class="rule"></div>
+          <div style="margin-top:1.5rem;">
+            <div class="form-row">
+              <div class="f-group"><label class="f-label">First Name</label><input class="f-input" type="text" placeholder="John"></div>
+              <div class="f-group"><label class="f-label">Last Name</label><input class="f-input" type="text" placeholder="Doe"></div>
+            </div>
+            <div class="f-group"><label class="f-label">Email</label><input class="f-input" type="email" placeholder="john@company.com"></div>
+            <div class="f-group"><label class="f-label">Phone</label><input class="f-input" type="tel" placeholder="+971 XX XXX XXXX"></div>
+            <div class="f-group">
+              <label class="f-label">Service</label>
+              <select class="f-input">
+                <option value="">Select a service</option>
+                <option>Fitout Works</option>
+                <option>Metal Fabrication</option>
+                <option>Structural Works</option>
+                <option>Joinery Works</option>
+                <option>Full Renovation</option>
+                <option>Landscaping</option>
+              </select>
+            </div>
+            <div class="f-group"><label class="f-label">Message</label><textarea class="f-input" placeholder="Tell us about your project..."></textarea></div>
+            <button class="btn-rg">Send Message</button>
+          </div>
+        </div>
+        <div class="contact-info-box reveal">
+          <div class="section-tag" style="margin-top:2rem;">Contact Details</div>
+          <h2 class="section-title" style="margin-bottom:2rem;">We're <span>Here</span> for You</h2>
+          <div class="ci-item"><div class="ci-label">Phone</div><div class="ci-val">+971 XX XXX XXXX</div></div>
+          <div class="ci-item"><div class="ci-label">Email</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c45424a436c56455f4a45584359585f024f4341">[email&#160;protected]</a></div></div>
+          <div class="ci-item"><div class="ci-label">Location</div><div class="ci-val">Dubai, United Arab Emirates</div></div>
+          <div class="ci-item"><div class="ci-label">Working Hours</div><div class="ci-val">Monday – Saturday<br>8:00 AM – 6:00 PM</div></div>
+          <div class="ci-cta">
+            <div class="section-tag">Ready to Build?</div>
+            <p>From small renovations to large-scale fitouts — ZIS Fitouts has the expertise, team, and passion to bring your vision to life.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div><div class="ft-logo-text">ZIS FITOUTS</div><div class="ft-since">Since 2005 · Dubai, UAE</div></div>
+    <div class="ft-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('fitout')">Fitout</a><a onclick="showPage('portfolio')">Our Works</a><a onclick="showPage('about')">About</a><a onclick="showPage('contact')">Contact</a></div>
+    <div class="ft-copy">© 2025 ZIS Fitouts LLC.</div>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Inject footer HTML into service pages
+const ftHTML = `<footer style="margin-top:0;background:#fff5f8;border-top:1px solid rgba(201,122,154,0.2);">
+  <div><div class="ft-logo-text">ZIS FITOUTS</div><div class="ft-since">Since 2005 · Dubai, UAE</div></div>
+  <div class="ft-links">
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('fitout')">Fitout Works</a>
+    <a onclick="showPage('joinery')">Joinery</a>
+    <a onclick="showPage('portfolio')">Our Works</a>
+    <a onclick="showPage('contact')">Contact</a>
+  </div>
+  <div class="ft-copy">© 2025 ZIS Fitouts LLC.</div>
+</footer>`;
+['fitout','metal','structural','joinery','renovation','landscaping'].forEach(id=>{
+  const el = document.getElementById(id+'-footer');
+  if(el) el.outerHTML = ftHTML;
+});
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg = document.getElementById('page-'+id);
+  if(pg){
+    pg.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    // re-trigger reveals
+    setTimeout(()=>{
+      pg.querySelectorAll('.reveal').forEach(el=>{
+        const rect = el.getBoundingClientRect();
+        if(rect.top < window.innerHeight) el.classList.add('vis');
+      });
+    },50);
+  }
+  // nav active state
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active-link'));
+  const map = {home:'nav-home',portfolio:'nav-portfolio',about:'nav-about',contact:'nav-contact'};
+  if(map[id]) document.getElementById(map[id])?.classList.add('active-link');
+}
+
+// Scroll reveal
+const revObserver = new In
